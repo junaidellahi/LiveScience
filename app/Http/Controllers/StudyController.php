@@ -264,6 +264,9 @@ public function deletecomment($id) {
   return redirect('/studies/managecomments/'.$studyid);
 }
 
+
+
+//function to like a study
 public function like(Request $request, $id) {
  $likestatus = $request->input('likestatus');
 if($likestatus == "like"){
