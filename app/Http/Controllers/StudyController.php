@@ -167,44 +167,28 @@ return view ('studies.studies', ['studies' => $studies]);
         'abstract'=>'required',
         'author'=>'required',
         'image'=>'required',
-        
-
       ]);
 $study = new Study();
 $study->title = $request->input('title');
 $study->subject = $request->input('subject');
 $study->abstract = $request->input('abstract');
 $study->author = $request->input('author');
-
  //CODE TO UPLOAD AND STORE IMAGE && IMAGE PATH
  $imageext = $request->file('image')->Extension();
-
- 
  // a NEW variable ASSIGNED which is time appended by the tittle and then the image extension file format
  $imagenew= time() . '-' . $request->input('title'). '.' . $request->file('image')->extension();
- 
  //MOVE THE IMAGE OF THE FILE TO PUBLIC/IMAGES
  $request->file('image')->move(public_path('images'), $imagenew );
  //SAVE THE IMAGE IN THE SQL TABLE AS THE NEW FILE NAME
  $study->image= $imagenew ; 
-  
- 
         //CODE TO UPLOAD AND STORE FILE
- 
         if(empty($request->input('file'))){
-
           $study->file="no file";
         }else{
-
-        
          $filenew= time() . '-' . $request->input('title'). '.' . $request->file('file')->extension();
-         
          $request->file('file')->move(public_path('files'), $filenew );
- 
-         $study->file = $filenew;}
-
+         $study->file = $filenew;
 $study->save();
-
 return redirect('/managemystudies');
 
     }
@@ -215,17 +199,12 @@ public function adddataset(Request $request) {// UPLOAD RESULTS AND DATASETS
     'file'=>'required'
   ]);
   $dataset = new Dataset();
-
  $dataset->name= request('title');  
  $dataset->description= request('description');  
   $dataset->study_id= request('study_id');  
-
   $filenew= time() . '-' . request('title'). '.' . request('file')->extension();
-        
   request('file')->move(public_path('files'), $filenew);
-
   $dataset->file = $filenew;
-  
   $dataset-> save(); 
 
 
@@ -239,8 +218,6 @@ public function addreference(Request $request, $id) {//ADD REFERENCES
     'title'=>'required|max:255',
     'type'=>'required',
     'author'=>'required' ]);
-    
-
   $reference= new Reference();
   $reference->study_id = $id;
   $reference->title = $request->input('title');
