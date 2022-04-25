@@ -192,6 +192,8 @@ $study->save();
 return redirect('/managemystudies');
 
     }
+
+  }
 public function adddataset(Request $request) {// UPLOAD RESULTS AND DATASETS
   $validated = $request->validate([
     'title'=>'required|max:255',
